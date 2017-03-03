@@ -6,7 +6,9 @@ import javax.annotation.PreDestroy;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
 
+@Component
 public class InitAndDestroySeqBean implements InitializingBean,DisposableBean {
 
     public InitAndDestroySeqBean(){
@@ -41,8 +43,4 @@ public class InitAndDestroySeqBean implements InitializingBean,DisposableBean {
         System.out.println("执行InitAndDestroySeqBean: destroy-method");
     }
 
-    public static void main(String[] args) {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("com/chj/spring/bean.xml");
-        context.close();
-    }
 }

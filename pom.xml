@@ -13,6 +13,10 @@
         <module>my-learn</module>
         <module>sipder</module>
         <module>elasticsearch-api</module>
+        <module>spring-cloud-eureka</module>
+        <module>spring-cloud-service</module>
+        <module>spring-cloud-ribbon</module>
+        <module>spring-cloud-feign</module>
     </modules>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->

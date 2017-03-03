@@ -4,6 +4,7 @@ import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.elasticsearch.transport.client.PreBuiltTransportClient;
+import org.springframework.web.bind.annotation.InitBinder;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -15,9 +16,9 @@ import java.util.concurrent.LinkedBlockingQueue;
  */
 public class ElasticSearchClientPool {
 
-    private volatile int corePoolSiz = 10;//核心池的大小
+    private static volatile int corePoolSiz = 10;//核心池的大小
 
-    private BlockingQueue<TransportClient> transportClients = new LinkedBlockingQueue(corePoolSiz);
+    private static volatile BlockingQueue<TransportClient> transportClients = new LinkedBlockingQueue(corePoolSiz);
 
     /**
      * 初始化客户端连接池
