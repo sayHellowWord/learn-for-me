@@ -4,10 +4,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <groupId>com.xiaowo</groupId>
-    <artifactId>spring-cloud-service</artifactId>
+    <artifactId>spring-cloud-zuul</artifactId>
     <modelVersion>4.0.0</modelVersion>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
+
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -22,22 +23,17 @@
         <java.version>1.8</java.version>
     </properties>
 
+
     <dependencies>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-zuul</artifactId>
         </dependency>
 
-        <dependency>
+       <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-eureka</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
     </dependencies>
@@ -47,7 +43,7 @@
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>Brixton.RELEASE</version>
+                <version>Camden.SR5</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -62,6 +58,5 @@
             </plugin>
         </plugins>
     </build>
-
 
 </project>
