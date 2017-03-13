@@ -19,6 +19,7 @@
         <module>spring-cloud-feign</module>
         <module>spring-cloud-config-server</module>
         <module>spring-cloud-zuul</module>
+        <module>algorithm</module>
     </modules>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
