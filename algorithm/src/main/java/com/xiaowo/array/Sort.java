@@ -71,6 +71,48 @@ public class Sort {
     }
 
     /**
+     * 插入排序(从小到大) 可优化
+     * 99999 int排序方法一比方法二慢500ms左右
+     */
+    public static void insertSort(Integer[] arr) {
+        long time = System.currentTimeMillis();
+        int length = arr.length;
+        for (int i = 0; i < length; i++) {
+            if (i > 0 && arr[i] < arr[i - 1]) { //保证肯定是要移动的
+                Integer tmp = arr[i];
+                int j = i - 1;
+                //注意此处结束条件和最后的赋值位置
+                for (; j >= 0; j--) {
+                    if (arr[j] > tmp) {
+                        arr[j + 1] = arr[j];
+                    } else {
+                        break;
+                    }
+                }
+                arr[j + 1] = tmp;
+            }
+        }
+        time = System.currentTimeMillis() - time;
+        System.out.println("插入排序时间:" + time + "结果："/* + printArr(arr)*/);
+    }
+
+    public static void insertSort2(Integer[] arr) {
+        long time = System.currentTimeMillis();
+        int length = arr.length;
+        for (int i = 1; i < length; i++) {
+            Integer tmp = arr[i];
+            int j = i;
+            while (j > 0 && arr[j - 1] > tmp) {
+                arr[j] = arr[j - 1];
+                j--;
+            }
+            arr[j] = tmp;
+        }
+        time = System.currentTimeMillis() - time;
+        System.out.println("插入排序时间2:" + time + "结果：" /*+ printArr(arr)*/);
+    }
+
+    /**
      * 打印数组
      * 打印99999个数字 stringBuilder比stringBuffer快4~5秒，当然也存在相反的情况，但是极少
      * 1.如果要操作少量的数据用 = String
@@ -100,7 +142,7 @@ public class Sort {
     public static void main(String[] args) {
 
         int length = 99999;
-        length = 10;
+       // length = 5;
 
         Integer[] arr = new Integer[length];
 
@@ -111,6 +153,8 @@ public class Sort {
         System.out.println("排序前：" + printArr(arr));
         //  bubbleSort(arr);
         // selectSort(arr);
+       // insertSort(arr);
+        insertSort2(arr);
     }
 
 }
