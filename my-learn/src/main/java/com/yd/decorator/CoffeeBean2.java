@@ -1,7 +1,15 @@
 package com.yd.decorator;
 
-/**
- * Created by nick on 2017/6/28.
- */
-public class CoffeeBean2 {
+public class CoffeeBean2 implements Beverage {
+
+    private String description = "第二种咖啡豆！";
+
+    public String getDescription() {
+        return description;
+    }
+
+    public double getPrice() {
+        return 100;
+    }
+
 }

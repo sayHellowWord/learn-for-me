@@ -9,7 +9,7 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>springboot-security</module>
+       <!-- <module>springboot-security</module>-->
         <module>my-learn</module>
         <module>sipder</module>
         <module>elasticsearch-api</module>
@@ -20,6 +20,7 @@
         <module>spring-cloud-config-server</module>
         <module>spring-cloud-zuul</module>
         <module>algorithm</module>
+        <module>stormexample</module>
     </modules>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->

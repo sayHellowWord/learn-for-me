@@ -1,7 +1,14 @@
 package com.yd.decorator;
 
 /**
- * Created by nick on 2017/6/28.
+ * 饮料接口
+ *
+ * @author Administrator
  */
-public class Beverage {
+public interface Beverage {
+    //返回商品描述
+    public String getDescription();
+
+    //返回价格
+    public double getPrice();
 }

@@ -3,7 +3,8 @@
  *
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
  *  @generated
- */
+ *//*
+
 package com.yd.thrift.demo;
 
 @SuppressWarnings({"cast", "rawtypes", "serial", "unchecked", "unused"})
@@ -12,13 +13,13 @@ public class HelloWordService {
 
   public interface Iface {
 
-    public java.lang.String doAction(Request request) throws RequestException, org.apache.thrift.TException;
+    public String doAction(Request request) throws RequestException, org.apache.thrift.TException;
 
   }
 
   public interface AsyncIface {
 
-    public void doAction(Request request, org.apache.thrift.async.AsyncMethodCallback<java.lang.String> resultHandler) throws org.apache.thrift.TException;
+    public void doAction(Request request, org.apache.thrift.async.AsyncMethodCallback<String> resultHandler) throws org.apache.thrift.TException;
 
   }
 
@@ -42,7 +43,7 @@ public class HelloWordService {
       super(iprot, oprot);
     }
 
-    public java.lang.String doAction(Request request) throws RequestException, org.apache.thrift.TException
+    public String doAction(Request request) throws RequestException, org.apache.thrift.TException
     {
       send_doAction(request);
       return recv_doAction();
@@ -55,7 +56,7 @@ public class HelloWordService {
       sendBase("doAction", args);
     }
 
-    public java.lang.String recv_doAction() throws RequestException, org.apache.thrift.TException
+    public String recv_doAction() throws RequestException, org.apache.thrift.TException
     {
       doAction_result result = new doAction_result();
       receiveBase(result, "doAction");
@@ -86,16 +87,16 @@ public class HelloWordService {
       super(protocolFactory, clientManager, transport);
     }
 
-    public void doAction(Request request, org.apache.thrift.async.AsyncMethodCallback<java.lang.String> resultHandler) throws org.apache.thrift.TException {
+    public void doAction(Request request, org.apache.thrift.async.AsyncMethodCallback<String> resultHandler) throws org.apache.thrift.TException {
       checkReady();
       doAction_call method_call = new doAction_call(request, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
-    public static class doAction_call extends org.apache.thrift.async.TAsyncMethodCall<java.lang.String> {
+    public static class doAction_call extends org.apache.thrift.async.TAsyncMethodCall<String> {
       private Request request;
-      public doAction_call(Request request, org.apache.thrift.async.AsyncMethodCallback<java.lang.String> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public doAction_call(Request request, org.apache.thrift.async.AsyncMethodCallback<String> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.request = request;
       }
@@ -108,9 +109,9 @@ public class HelloWordService {
         prot.writeMessageEnd();
       }
 
-      public java.lang.String getResult() throws RequestException, org.apache.thrift.TException {
-        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
-          throw new java.lang.IllegalStateException("Method call not finished!");
+      public String getResult() throws RequestException, org.apache.thrift.TException {
+        if (getState() != State.RESPONSE_READ) {
+          throw new IllegalStateException("Method call not finished!");
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
         org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
@@ -123,14 +124,14 @@ public class HelloWordService {
   public static class Processor<I extends Iface> extends org.apache.thrift.TBaseProcessor<I> implements org.apache.thrift.TProcessor {
     private static final org.slf4j.Logger _LOGGER = org.slf4j.LoggerFactory.getLogger(Processor.class.getName());
     public Processor(I iface) {
-      super(iface, getProcessMap(new java.util.HashMap<java.lang.String, org.apache.thrift.ProcessFunction<I, ? extends org.apache.thrift.TBase>>()));
+      super(iface, getProcessMap(new java.util.HashMap<String, org.apache.thrift.ProcessFunction<I, ? extends org.apache.thrift.TBase>>()));
     }
 
-    protected Processor(I iface, java.util.Map<java.lang.String, org.apache.thrift.ProcessFunction<I, ? extends org.apache.thrift.TBase>> processMap) {
+    protected Processor(I iface, java.util.Map<String, org.apache.thrift.ProcessFunction<I, ? extends org.apache.thrift.TBase>> processMap) {
       super(iface, getProcessMap(processMap));
     }
 
-    private static <I extends Iface> java.util.Map<java.lang.String,  org.apache.thrift.ProcessFunction<I, ? extends org.apache.thrift.TBase>> getProcessMap(java.util.Map<java.lang.String, org.apache.thrift.ProcessFunction<I, ? extends  org.apache.thrift.TBase>> processMap) {
+    private static <I extends Iface> java.util.Map<String,  org.apache.thrift.ProcessFunction<I, ? extends org.apache.thrift.TBase>> getProcessMap(java.util.Map<String, org.apache.thrift.ProcessFunction<I, ? extends  org.apache.thrift.TBase>> processMap) {
       processMap.put("doAction", new doAction());
       return processMap;
     }
@@ -164,19 +165,19 @@ public class HelloWordService {
   public static class AsyncProcessor<I extends AsyncIface> extends org.apache.thrift.TBaseAsyncProcessor<I> {
     private static final org.slf4j.Logger _LOGGER = org.slf4j.LoggerFactory.getLogger(AsyncProcessor.class.getName());
     public AsyncProcessor(I iface) {
-      super(iface, getProcessMap(new java.util.HashMap<java.lang.String, org.apache.thrift.AsyncProcessFunction<I, ? extends org.apache.thrift.TBase, ?>>()));
+      super(iface, getProcessMap(new java.util.HashMap<String, org.apache.thrift.AsyncProcessFunction<I, ? extends org.apache.thrift.TBase, ?>>()));
     }
 
-    protected AsyncProcessor(I iface, java.util.Map<java.lang.String,  org.apache.thrift.AsyncProcessFunction<I, ? extends  org.apache.thrift.TBase, ?>> processMap) {
+    protected AsyncProcessor(I iface, java.util.Map<String,  org.apache.thrift.AsyncProcessFunction<I, ? extends  org.apache.thrift.TBase, ?>> processMap) {
       super(iface, getProcessMap(processMap));
     }
 
-    private static <I extends AsyncIface> java.util.Map<java.lang.String,  org.apache.thrift.AsyncProcessFunction<I, ? extends  org.apache.thrift.TBase,?>> getProcessMap(java.util.Map<java.lang.String,  org.apache.thrift.AsyncProcessFunction<I, ? extends  org.apache.thrift.TBase, ?>> processMap) {
+    private static <I extends AsyncIface> java.util.Map<String,  org.apache.thrift.AsyncProcessFunction<I, ? extends  org.apache.thrift.TBase,?>> getProcessMap(java.util.Map<String,  org.apache.thrift.AsyncProcessFunction<I, ? extends  org.apache.thrift.TBase, ?>> processMap) {
       processMap.put("doAction", new doAction());
       return processMap;
     }
 
-    public static class doAction<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, doAction_args, java.lang.String> {
+    public static class doAction<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, doAction_args, String> {
       public doAction() {
         super("doAction");
       }
@@ -185,10 +186,10 @@ public class HelloWordService {
         return new doAction_args();
       }
 
-      public org.apache.thrift.async.AsyncMethodCallback<java.lang.String> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
+      public org.apache.thrift.async.AsyncMethodCallback<String> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
-        return new org.apache.thrift.async.AsyncMethodCallback<java.lang.String>() { 
-          public void onComplete(java.lang.String o) {
+        return new org.apache.thrift.async.AsyncMethodCallback<String>() {
+          public void onComplete(String o) {
             doAction_result result = new doAction_result();
             result.success = o;
             try {
@@ -196,12 +197,12 @@ public class HelloWordService {
             } catch (org.apache.thrift.transport.TTransportException e) {
               _LOGGER.error("TTransportException writing to internal frame buffer", e);
               fb.close();
-            } catch (java.lang.Exception e) {
+            } catch (Exception e) {
               _LOGGER.error("Exception writing to internal frame buffer", e);
               onError(e);
             }
           }
-          public void onError(java.lang.Exception e) {
+          public void onError(Exception e) {
             byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
             org.apache.thrift.TSerializable msg;
             doAction_result result = new doAction_result();
@@ -224,7 +225,7 @@ public class HelloWordService {
             }
             try {
               fcall.sendResponse(fb,msg,msgType,seqid);
-            } catch (java.lang.Exception ex) {
+            } catch (Exception ex) {
               _LOGGER.error("Exception writing to internal frame buffer", ex);
               fb.close();
             }
@@ -236,7 +237,7 @@ public class HelloWordService {
         return false;
       }
 
-      public void start(I iface, doAction_args args, org.apache.thrift.async.AsyncMethodCallback<java.lang.String> resultHandler) throws org.apache.thrift.TException {
+      public void start(I iface, doAction_args args, org.apache.thrift.async.AsyncMethodCallback<String> resultHandler) throws org.apache.thrift.TException {
         iface.doAction(args.request,resultHandler);
       }
     }
@@ -253,11 +254,13 @@ public class HelloWordService {
 
     public Request request; // required
 
-    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    */
+/** The set of fields this struct contains, along with convenience methods for finding and manipulating them. *//*
+
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
       REQUEST((short)1, "request");
 
-      private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
+      private static final java.util.Map<String, _Fields> byName = new java.util.HashMap<String, _Fields>();
 
       static {
         for (_Fields field : java.util.EnumSet.allOf(_Fields.class)) {
@@ -265,9 +268,11 @@ public class HelloWordService {
         }
       }
 
-      /**
+      */
+/**
        * Find the _Fields constant that matches fieldId, or null if its not found.
-       */
+       *//*
+
       public static _Fields findByThriftId(int fieldId) {
         switch(fieldId) {
           case 1: // REQUEST
@@ -277,27 +282,31 @@ public class HelloWordService {
         }
       }
 
-      /**
+      */
+/**
        * Find the _Fields constant that matches fieldId, throwing an exception
        * if it is not found.
-       */
+       *//*
+
       public static _Fields findByThriftIdOrThrow(int fieldId) {
         _Fields fields = findByThriftId(fieldId);
-        if (fields == null) throw new java.lang.IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
         return fields;
       }
 
-      /**
+      */
+/**
        * Find the _Fields constant that matches name, or null if its not found.
-       */
-      public static _Fields findByName(java.lang.String name) {
+       *//*
+
+      public static _Fields findByName(String name) {
         return byName.get(name);
       }
 
       private final short _thriftId;
-      private final java.lang.String _fieldName;
+      private final String _fieldName;
 
-      _Fields(short thriftId, java.lang.String fieldName) {
+      _Fields(short thriftId, String fieldName) {
         _thriftId = thriftId;
         _fieldName = fieldName;
       }
@@ -306,7 +315,7 @@ public class HelloWordService {
         return _thriftId;
       }
 
-      public java.lang.String getFieldName() {
+      public String getFieldName() {
         return _fieldName;
       }
     }
@@ -331,9 +340,11 @@ public class HelloWordService {
       this.request = request;
     }
 
-    /**
+    */
+/**
      * Performs a deep copy on <i>other</i>.
-     */
+     *//*
+
     public doAction_args(doAction_args other) {
       if (other.isSetRequest()) {
         this.request = new Request(other.request);
@@ -362,7 +373,9 @@ public class HelloWordService {
       this.request = null;
     }
 
-    /** Returns true if field request is set (has been assigned a value) and false otherwise */
+    */
+/** Returns true if field request is set (has been assigned a value) and false otherwise *//*
+
     public boolean isSetRequest() {
       return this.request != null;
     }
@@ -373,7 +386,7 @@ public class HelloWordService {
       }
     }
 
-    public void setFieldValue(_Fields field, java.lang.Object value) {
+    public void setFieldValue(_Fields field, Object value) {
       switch (field) {
       case REQUEST:
         if (value == null) {
@@ -386,30 +399,32 @@ public class HelloWordService {
       }
     }
 
-    public java.lang.Object getFieldValue(_Fields field) {
+    public Object getFieldValue(_Fields field) {
       switch (field) {
       case REQUEST:
         return getRequest();
 
       }
-      throw new java.lang.IllegalStateException();
+      throw new IllegalStateException();
     }
 
-    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    */
+/** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise *//*
+
     public boolean isSet(_Fields field) {
       if (field == null) {
-        throw new java.lang.IllegalArgumentException();
+        throw new IllegalArgumentException();
       }
 
       switch (field) {
       case REQUEST:
         return isSetRequest();
       }
-      throw new java.lang.IllegalStateException();
+      throw new IllegalStateException();
     }
 
     @Override
-    public boolean equals(java.lang.Object that) {
+    public boolean equals(Object that) {
       if (that == null)
         return false;
       if (that instanceof doAction_args)
@@ -454,7 +469,7 @@ public class HelloWordService {
 
       int lastComparison = 0;
 
-      lastComparison = java.lang.Boolean.valueOf(isSetRequest()).compareTo(other.isSetRequest());
+      lastComparison = Boolean.valueOf(isSetRequest()).compareTo(other.isSetRequest());
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -480,8 +495,8 @@ public class HelloWordService {
     }
 
     @Override
-    public java.lang.String toString() {
-      java.lang.StringBuilder sb = new java.lang.StringBuilder("doAction_args(");
+    public String toString() {
+      StringBuilder sb = new StringBuilder("doAction_args(");
       boolean first = true;
 
       sb.append("request:");
@@ -511,7 +526,7 @@ public class HelloWordService {
       }
     }
 
-    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, java.lang.ClassNotFoundException {
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
       } catch (org.apache.thrift.TException te) {
@@ -619,15 +634,17 @@ public class HelloWordService {
     private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new doAction_resultStandardSchemeFactory();
     private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new doAction_resultTupleSchemeFactory();
 
-    public java.lang.String success; // required
+    public String success; // required
     public RequestException qe; // required
 
-    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    */
+/** The set of fields this struct contains, along with convenience methods for finding and manipulating them. *//*
+
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
       SUCCESS((short)0, "success"),
       QE((short)1, "qe");
 
-      private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
+      private static final java.util.Map<String, _Fields> byName = new java.util.HashMap<String, _Fields>();
 
       static {
         for (_Fields field : java.util.EnumSet.allOf(_Fields.class)) {
@@ -635,9 +652,11 @@ public class HelloWordService {
         }
       }
 
-      /**
+      */
+/**
        * Find the _Fields constant that matches fieldId, or null if its not found.
-       */
+       *//*
+
       public static _Fields findByThriftId(int fieldId) {
         switch(fieldId) {
           case 0: // SUCCESS
@@ -649,27 +668,31 @@ public class HelloWordService {
         }
       }
 
-      /**
+      */
+/**
        * Find the _Fields constant that matches fieldId, throwing an exception
        * if it is not found.
-       */
+       *//*
+
       public static _Fields findByThriftIdOrThrow(int fieldId) {
         _Fields fields = findByThriftId(fieldId);
-        if (fields == null) throw new java.lang.IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
         return fields;
       }
 
-      /**
+      */
+/**
        * Find the _Fields constant that matches name, or null if its not found.
-       */
-      public static _Fields findByName(java.lang.String name) {
+       *//*
+
+      public static _Fields findByName(String name) {
         return byName.get(name);
       }
 
       private final short _thriftId;
-      private final java.lang.String _fieldName;
+      private final String _fieldName;
 
-      _Fields(short thriftId, java.lang.String fieldName) {
+      _Fields(short thriftId, String fieldName) {
         _thriftId = thriftId;
         _fieldName = fieldName;
       }
@@ -678,7 +701,7 @@ public class HelloWordService {
         return _thriftId;
       }
 
-      public java.lang.String getFieldName() {
+      public String getFieldName() {
         return _fieldName;
       }
     }
@@ -699,7 +722,7 @@ public class HelloWordService {
     }
 
     public doAction_result(
-      java.lang.String success,
+      String success,
       RequestException qe)
     {
       this();
@@ -707,9 +730,11 @@ public class HelloWordService {
       this.qe = qe;
     }
 
-    /**
+    */
+/**
      * Performs a deep copy on <i>other</i>.
-     */
+     *//*
+
     public doAction_result(doAction_result other) {
       if (other.isSetSuccess()) {
         this.success = other.success;
@@ -729,11 +754,11 @@ public class HelloWordService {
       this.qe = null;
     }
 
-    public java.lang.String getSuccess() {
+    public String getSuccess() {
       return this.success;
     }
 
-    public doAction_result setSuccess(java.lang.String success) {
+    public doAction_result setSuccess(String success) {
       this.success = success;
       return this;
     }
@@ -742,7 +767,9 @@ public class HelloWordService {
       this.success = null;
     }
 
-    /** Returns true if field success is set (has been assigned a value) and false otherwise */
+    */
+/** Returns true if field success is set (has been assigned a value) and false otherwise *//*
+
     public boolean isSetSuccess() {
       return this.success != null;
     }
@@ -766,7 +793,9 @@ public class HelloWordService {
       this.qe = null;
     }
 
-    /** Returns true if field qe is set (has been assigned a value) and false otherwise */
+    */
+/** Returns true if field qe is set (has been assigned a value) and false otherwise *//*
+
     public boolean isSetQe() {
       return this.qe != null;
     }
@@ -777,13 +806,13 @@ public class HelloWordService {
       }
     }
 
-    public void setFieldValue(_Fields field, java.lang.Object value) {
+    public void setFieldValue(_Fields field, Object value) {
       switch (field) {
       case SUCCESS:
         if (value == null) {
           unsetSuccess();
         } else {
-          setSuccess((java.lang.String)value);
+          setSuccess((String)value);
         }
         break;
 
@@ -798,7 +827,7 @@ public class HelloWordService {
       }
     }
 
-    public java.lang.Object getFieldValue(_Fields field) {
+    public Object getFieldValue(_Fields field) {
       switch (field) {
       case SUCCESS:
         return getSuccess();
@@ -807,13 +836,15 @@ public class HelloWordService {
         return getQe();
 
       }
-      throw new java.lang.IllegalStateException();
+      throw new IllegalStateException();
     }
 
-    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    */
+/** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise *//*
+
     public boolean isSet(_Fields field) {
       if (field == null) {
-        throw new java.lang.IllegalArgumentException();
+        throw new IllegalArgumentException();
       }
 
       switch (field) {
@@ -822,11 +853,11 @@ public class HelloWordService {
       case QE:
         return isSetQe();
       }
-      throw new java.lang.IllegalStateException();
+      throw new IllegalStateException();
     }
 
     @Override
-    public boolean equals(java.lang.Object that) {
+    public boolean equals(Object that) {
       if (that == null)
         return false;
       if (that instanceof doAction_result)
@@ -884,7 +915,7 @@ public class HelloWordService {
 
       int lastComparison = 0;
 
-      lastComparison = java.lang.Boolean.valueOf(isSetSuccess()).compareTo(other.isSetSuccess());
+      lastComparison = Boolean.valueOf(isSetSuccess()).compareTo(other.isSetSuccess());
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -894,7 +925,7 @@ public class HelloWordService {
           return lastComparison;
         }
       }
-      lastComparison = java.lang.Boolean.valueOf(isSetQe()).compareTo(other.isSetQe());
+      lastComparison = Boolean.valueOf(isSetQe()).compareTo(other.isSetQe());
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -920,8 +951,8 @@ public class HelloWordService {
       }
 
     @Override
-    public java.lang.String toString() {
-      java.lang.StringBuilder sb = new java.lang.StringBuilder("doAction_result(");
+    public String toString() {
+      StringBuilder sb = new StringBuilder("doAction_result(");
       boolean first = true;
 
       sb.append("success:");
@@ -956,7 +987,7 @@ public class HelloWordService {
       }
     }
 
-    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, java.lang.ClassNotFoundException {
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
       } catch (org.apache.thrift.TException te) {
@@ -1079,3 +1110,4 @@ public class HelloWordService {
   }
 
 }
+*/
