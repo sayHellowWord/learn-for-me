@@ -21,6 +21,8 @@
         <module>spring-cloud-zuul</module>
         <module>algorithm</module>
         <module>stormexample</module>
+        <module>spring-boot</module>
+        <module>jdk8-source-read</module>
     </modules>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->

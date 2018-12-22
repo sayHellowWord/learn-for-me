@@ -1,0 +1,4 @@
+worker-id: f05e1cd3-8b7c-41e3-9875-e9a5a778aeec
+logs.users: []
+logs.groups: []
+topology.submitter.user: nick

@@ -13,7 +13,9 @@ import java.util.Map;
  */
 public class AviatorDemo {
     public static void main(String[] args) {
-        String expression = "a-(b-c)>100";
+//        String expression = "a-(b-c)==100";
+        String expression = "payIncome+refundIncome==totalFloorIncome";
+//        String expression = "model.a    >   model.b";
 
 //        String expression = "a>0? 'yes':'no'";
 
@@ -23,14 +25,20 @@ public class AviatorDemo {
 
 
         Map<String, Object> env = new HashMap<String, Object>();
-        env.put("a", 100.3);
-        env.put("b", 45);
-        env.put("c", -199.100);
+        env.put("payIncome", 100.3);
+        env.put("refundIncome", 45);
+        env.put("totalFloorIncome", -199.100);
+        env.put("totalFloorIncome1", -199.100);
+
+//        env.put("model", new AviatorSum(1, 2));
+
         // 执行表达式
         Boolean result = (Boolean) compiledExp.execute(env);
         System.out.println(result);  // false
+/*
 
-        System.out.println(AviatorEvaluator.exec("a>0? b>0? '111':'222':'no'", 1,-1));
+        System.out.println(AviatorEvaluator.exec("a>0? b>0? '111':'222':'no'", 1, -1));
+*/
 
 /*
         Map<String, Object> env = new HashMap<String, Object>();
