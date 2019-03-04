@@ -6,6 +6,8 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Created by Administrator on 2017/2/23.
@@ -32,9 +34,9 @@ public class StreamTest {
     }
 
     /*
-   * 归约
-   * reduce(T identity,BinaryOperator b) / reduce(BinaryOperator b)-可以将流中元素反复结合起来，得到一个值。
-   */
+     * 归约
+     * reduce(T identity,BinaryOperator b) / reduce(BinaryOperator b)-可以将流中元素反复结合起来，得到一个值。
+     */
     @Test
     public void test3() {
         List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
@@ -44,10 +46,37 @@ public class StreamTest {
 
         System.out.println("--------------------------");
 
-        Optional<Double> op = employees.stream()//reduce(BinaryOperator b)//没有起始值，map返回可能为空，所以返回Optional类型
+        Optional<Double> op = employees.parallelStream()//reduce(BinaryOperator b)//没有起始值，map返回可能为空，所以返回Optional类型
                 .map(Employee::getSalary)
                 .reduce(Double::sum);
         System.out.println(op.get());
+    }
+
+
+    @Test
+    public void test4() {
+
+        List<Long> test = Stream.iterate(1L, n -> n + 1).peek(v -> {
+            System.out.println("print " + v);
+        }).limit(100).collect(Collectors.toList());
+
+        long start = System.currentTimeMillis();
+
+        test.stream().count();
+
+        long tmp = System.currentTimeMillis();
+
+        test.parallelStream().peek(v -> {
+            System.out.println("print ++  " + v);
+        }).count();
+
+        long end = System.currentTimeMillis();
+
+        long startEnd = tmp - start;
+        long tmpEnd = end - tmp;
+
+        System.out.println("" + startEnd + " : " + tmpEnd);
+
     }
 
 }
