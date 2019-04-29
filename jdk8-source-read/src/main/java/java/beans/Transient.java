@@ -60,6 +60,9 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * in any superclass the feature is not transient.
  *
  * @since 1.7
+ *
+ * https://www.cnblogs.com/lanxuezaipiao/p/3369962.html
+ *
  */
 @Target({METHOD})
 @Retention(RUNTIME)

@@ -581,12 +581,14 @@ public abstract class AbstractQueuedSynchronizer
      * @return node's predecessor
      */
     private Node enq(final Node node) {
+
+        //CAS"自旋"，直到成功加入队尾
         for (;;) {
             Node t = tail;
-            if (t == null) { // Must initialize
+            if (t == null) { // Must initialize 队列为空，创建一个空的标志结点作为head结点，并将tail也指向它。
                 if (compareAndSetHead(new Node()))
                     tail = head;
-            } else {
+            } else { //正常流程，放入队尾
                 node.prev = t;
                 if (compareAndSetTail(t, node)) {
                     t.next = node;
@@ -597,13 +599,18 @@ public abstract class AbstractQueuedSynchronizer
     }
 
     /**
+     * 将当前线程加入到等待队列的队尾，并返回当前线程所在的结点
+     *
      * Creates and enqueues node for current thread and given mode.
      *
      * @param mode Node.EXCLUSIVE for exclusive, Node.SHARED for shared
      * @return the new node
      */
     private Node addWaiter(Node mode) {
+        //以给定模式构造结点。mode有两种：EXCLUSIVE（独占）和SHARED（共享）
         Node node = new Node(Thread.currentThread(), mode);
+
+        //尝试快速方式直接放到队尾
         // Try the fast path of enq; backup to full enq on failure
         Node pred = tail;
         if (pred != null) {
@@ -613,6 +620,8 @@ public abstract class AbstractQueuedSynchronizer
                 return node;
             }
         }
+
+        //上一步失败则通过enq入队
         enq(node);
         return node;
     }
@@ -847,6 +856,8 @@ public abstract class AbstractQueuedSynchronizer
      */
 
     /**
+     * 使线程在等待队列中获取资源，一直获取到资源后才返回。如果在整个等待过程中被中断过，则返回true，否则返回false。
+     *
      * Acquires in exclusive uninterruptible mode for thread already in
      * queue. Used by condition wait methods as well as acquire.
      *
@@ -1047,6 +1058,7 @@ public abstract class AbstractQueuedSynchronizer
     // Main exported methods
 
     /**
+     * 尝试直接去获取资源，如果成功则直接返回；
      * Attempts to acquire in exclusive mode. This method should query
      * if the state of the object permits it to be acquired in the
      * exclusive mode, and if so to acquire it.
@@ -1183,6 +1195,14 @@ public abstract class AbstractQueuedSynchronizer
     }
 
     /**
+     *
+     * tryAcquire()尝试直接去获取资源，如果成功则直接返回；
+     * addWaiter()将该线程加入等待队列的尾部，并标记为独占模式；
+     * acquireQueued()使线程在等待队列中获取资源，一直获取到资源后才返回。如果在整个等待过程中被中断过，则返回true，否则返回false。
+     * 如果线程在等待过程中被中断过，它是不响应的。只是获取资源后才再进行自我中断selfInterrupt()，将中断补上。
+     *
+     *
+     *
      * Acquires in exclusive mode, ignoring interrupts.  Implemented
      * by invoking at least once {@link #tryAcquire},
      * returning on success.  Otherwise the thread is queued, possibly

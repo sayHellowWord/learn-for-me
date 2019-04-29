@@ -473,6 +473,7 @@ public class ThreadLocal<T> {
                 }
 
                 if (k == null) {
+                    //防止内存泄漏 将所有键为 null 的 Entry 的值设置为 null，从而使得该值可被回收
                     replaceStaleEntry(key, value, i);
                     return;
                 }
