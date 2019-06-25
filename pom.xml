@@ -23,6 +23,8 @@
         <module>stormexample</module>
         <module>spring-boot</module>
         <module>jdk8-source-read</module>
+        <module>spring-boot-demo</module>
+        <module>com-xiaowo-jar</module>
     </modules>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
