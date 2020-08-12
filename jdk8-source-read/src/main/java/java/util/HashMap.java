@@ -334,7 +334,8 @@ public class HashMap<K,V> extends AbstractMap<K,V>
      * never be used in index calculations because of table bounds.
      */
     static final int hash(Object key) {
-        int h;
+        // 如果key为null，则hash值为0，否则调用key的hashCode()方法
+        // 并让高16位与整个hash异或，这样做是为了使计算出的hash更分散int h;
         return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
     }
 
@@ -625,44 +626,79 @@ public class HashMap<K,V> extends AbstractMap<K,V>
                    boolean evict) {
         Node<K,V>[] tab; Node<K,V> p; int n, i;
 
+        // 如果桶的数量为0，则初始化
         if ((tab = table) == null || (n = tab.length) == 0)
             n = (tab = resize()).length;
 
+        // (n - 1) & hash 计算元素在哪个桶中
+        // 如果这个桶中还没有元素，则把这个元素放在桶中的第一个位置
         if ((p = tab[i = (n - 1) & hash]) == null)
+            // 新建一个节点放在桶中
             tab[i] = newNode(hash, key, value, null);
-        else {
+        else {// 如果桶中已经有元素存在了
             Node<K,V> e; K k;
+
+            //P为桶中的第一个元素
+
+            //如果桶中第一个元素的key与待插入元素的key相同，保存到e中用于后续修改value值
             if (p.hash == hash &&
                 ((k = p.key) == key || (key != null && key.equals(k))))
                 e = p;
             else if (p instanceof TreeNode)
+                // 如果第一个元素是树节点，则调用树节点的putTreeVal插入元素
                 e = ((TreeNode<K,V>)p).putTreeVal(this, tab, hash, key, value);
             else {
+                //链表同时第一个元素与插入元素的key不相同，退化为1.7的
+
+                //遍历这个桶对应的链表，binCount用于存储链表中元素的个数
                 for (int binCount = 0; ; ++binCount) {
+
+                    //如果链表遍历完了都没有找到相同key的元素，说明该key对应的元素不存在，则在链表最后插入一个新节点
                     if ((e = p.next) == null) {
                         p.next = newNode(hash, key, value, null);
+
+                        // 如果插入新节点后链表长度大于8，则判断是否需要树化，因为第一个元素没有加到binCount中，所以这里-1
                         if (binCount >= TREEIFY_THRESHOLD - 1) // -1 for 1st
                             treeifyBin(tab, hash);
                         break;
                     }
+
+                    // 如果待插入的key在链表中找到了，则退出循环
                     if (e.hash == hash &&
                         ((k = e.key) == key || (key != null && key.equals(k))))
                         break;
                     p = e;
                 }
+
             }
+
+            // 如果找到了对应key的元素
             if (e != null) { // existing mapping for key
                 V oldValue = e.value;
+
+                // 判断是否需要替换旧值
                 if (!onlyIfAbsent || oldValue == null)
                     e.value = value;
+
+                // 在节点被访问后做点什么事，在LinkedHashMap中用到
                 afterNodeAccess(e);
                 return oldValue;
             }
         }
+
+
+
+        // 到这里了说明没有找到元素
+        // 修改次数加1
         ++modCount;
+
+        // 元素数量加1，判断是否需要扩容
         if (++size > threshold)
-            resize();
+          resize();   // 扩容
+
+        // 在节点插入后做点什么事，在LinkedHashMap中用到
         afterNodeInsertion(evict);
+
         return null;
     }
 
@@ -679,6 +715,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
         Node<K,V>[] oldTab = table;
         int oldCap = (oldTab == null) ? 0 : oldTab.length;
         int oldThr = threshold;
+
         int newCap, newThr = 0;
         if (oldCap > 0) {
             if (oldCap >= MAXIMUM_CAPACITY) {
@@ -686,39 +723,60 @@ public class HashMap<K,V> extends AbstractMap<K,V>
                 return oldTab;
             }
             else if ((newCap = oldCap << 1) < MAXIMUM_CAPACITY &&
-                     oldCap >= DEFAULT_INITIAL_CAPACITY)
+                     oldCap >= DEFAULT_INITIAL_CAPACITY)// 如果旧容量的两倍小于最大容量并且旧容量大于默认初始容量（16），则容量扩大为两部，扩容门槛也扩大为两倍
                 newThr = oldThr << 1; // double threshold
         }
         else if (oldThr > 0) // initial capacity was placed in threshold
+            // 使用非默认构造方法创建的map，第一次插入元素会走到这里
+            // 如果旧容量为0且旧扩容门槛大于0，则把新容量赋值为旧门槛
             newCap = oldThr;
         else {               // zero initial threshold signifies using defaults
             newCap = DEFAULT_INITIAL_CAPACITY;
             newThr = (int)(DEFAULT_LOAD_FACTOR * DEFAULT_INITIAL_CAPACITY);
         }
+
+        
         if (newThr == 0) {
             float ft = (float)newCap * loadFactor;
             newThr = (newCap < MAXIMUM_CAPACITY && ft < (float)MAXIMUM_CAPACITY ?
                       (int)ft : Integer.MAX_VALUE);
         }
         threshold = newThr;
+
         @SuppressWarnings({"rawtypes","unchecked"})
-            Node<K,V>[] newTab = (Node<K,V>[])new Node[newCap];
+        Node<K,V>[] newTab = (Node<K,V>[])new Node[newCap];
         table = newTab;
-        if (oldTab != null) {
+
+        if (oldTab != null) {// 如果旧数组不为空，则搬移元素
+
             for (int j = 0; j < oldCap; ++j) {
                 Node<K,V> e;
+
+                // 如果桶中第一个元素不为空，赋值给e
                 if ((e = oldTab[j]) != null) {
                     oldTab[j] = null;
+
+                    // 如果这个桶中只有一个元素，则计算它在新桶中的位置并把它搬移到新桶中
+                    // 因为每次都扩容两倍，所以这里的第一个元素搬移到新桶的时候新桶肯定还没有元素
                     if (e.next == null)
                         newTab[e.hash & (newCap - 1)] = e;
                     else if (e instanceof TreeNode)
+                        // 如果第一个元素是树节点，则把这颗树打散成两颗树插入到新桶中去
                         ((TreeNode<K,V>)e).split(this, newTab, j, oldCap);
                     else { // preserve order
+
+                        // 如果这个链表不止一个元素且不是一颗树
+                        // 则分化成两个链表插入到新的桶中去
+                        // 比如，假如原来容量为4，3、7、11、15这四个元素都在三号桶中
+                        // 现在扩容到8，则3和11还是在三号桶，7和15要搬移到七号桶中去
                         Node<K,V> loHead = null, loTail = null;
                         Node<K,V> hiHead = null, hiTail = null;
                         Node<K,V> next;
                         do {
                             next = e.next;
+
+                            // (e.hash & oldCap) == 0的元素放在低位链表中
+                            // 比如，3 & 4 == 0
                             if ((e.hash & oldCap) == 0) {
                                 if (loTail == null)
                                     loHead = e;
@@ -727,6 +785,8 @@ public class HashMap<K,V> extends AbstractMap<K,V>
                                 loTail = e;
                             }
                             else {
+                                // (e.hash & oldCap) != 0的元素放在高位链表中
+                                // 比如，7 & 4 != 0
                                 if (hiTail == null)
                                     hiHead = e;
                                 else
@@ -734,10 +794,14 @@ public class HashMap<K,V> extends AbstractMap<K,V>
                                 hiTail = e;
                             }
                         } while ((e = next) != null);
+
+                        // 遍历完成分化成两个链表了
+                        // 低位链表在新桶中的位置与旧桶一样（即3和11还在三号桶中）
                         if (loTail != null) {
                             loTail.next = null;
                             newTab[j] = loHead;
                         }
+                        // 高位链表在新桶中的位置正好是原来的位置加上旧容量（即7和15搬移到七号桶了）
                         if (hiTail != null) {
                             hiTail.next = null;
                             newTab[j + oldCap] = hiHead;

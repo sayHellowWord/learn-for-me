@@ -74,4 +74,11 @@ public class TimeTest {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_DATE_TIME;
         System.out.println(dateTimeFormatter.format(LocalDateTime.now()));
     }
+
+    @Test
+    public void test6() {
+
+        System.out.println(LocalTime.now().getHour());
+
+    }
 }
