@@ -130,6 +130,8 @@ public class ArrayList<E> extends AbstractList<E>
      * The capacity of the ArrayList is the length of this array buffer. Any
      * empty ArrayList with elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA
      * will be expanded to DEFAULT_CAPACITY when the first element is added.
+     *
+     * transient是为了不序列化这个字段
      */
     transient Object[] elementData; // non-private to simplify nested class access
 
@@ -252,6 +254,7 @@ public class ArrayList<E> extends AbstractList<E>
     private void grow(int minCapacity) {
         // overflow-conscious code
         int oldCapacity = elementData.length;
+        // 新容量为旧容量的1.5倍
         int newCapacity = oldCapacity + (oldCapacity >> 1);
         if (newCapacity - minCapacity < 0)
             newCapacity = minCapacity;
@@ -455,7 +458,9 @@ public class ArrayList<E> extends AbstractList<E>
      * @return <tt>true</tt> (as specified by {@link Collection#add})
      */
     public boolean add(E e) {
+        // 检查是否需要扩容
         ensureCapacityInternal(size + 1);  // Increments modCount!!
+        // 把元素插入到最后一位
         elementData[size++] = e;
         return true;
     }
