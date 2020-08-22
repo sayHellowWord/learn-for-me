@@ -27,6 +27,8 @@
         <module>com-xiaowo-jar</module>
         <module>kafka-demo</module>
         <module>jvm</module>
+        <module>spring-demo</module>
+        <module>spring-demo</module>
     </modules>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
