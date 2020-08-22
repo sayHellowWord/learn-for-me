@@ -26,6 +26,7 @@
         <module>spring-boot-demo</module>
         <module>com-xiaowo-jar</module>
         <module>kafka-demo</module>
+        <module>jvm</module>
     </modules>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
