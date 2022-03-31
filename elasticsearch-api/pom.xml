@@ -13,7 +13,7 @@
     <artifactId>elasticsearch-api</artifactId>
 
     <properties>
-        <spring.framework.version>1.5.1.RELEASE</spring.framework.version>
+        <spring.framework.version>2.5.12</spring.framework.version>
     </properties>
 
     <dependencies>
